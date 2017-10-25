@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/icoClose-48.png</file>
+        <file>images/icoCopy-48.png</file>
+        <file>images/icoCreate-48.png</file>
+        <file>images/icoCut-48.png</file>
+        <file>images/icoOpen-48.png</file>
+        <file>images/icoPaste-48.png</file>
+        <file>images/icoRedo-48.png</file>
+        <file>images/icoSave-48.png</file>
+        <file>images/icoUndo-48.png</file>
+        <file>images/icoSave_as-48.png</file>
+        <file>images/icoFont-48.png</file>
+        <file>images/icoExit-48.png</file>
+        <file>images/icoPen-48.png</file>
+        <file>About.txt</file>
+        <file>images/icoInfo.png</file>
+    </qresource>
+</RCC>

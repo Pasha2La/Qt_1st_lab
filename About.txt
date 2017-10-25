@@ -1,0 +1,5 @@
+MyTextEditor v1.0
+20.10.2017
+Developed by: Ognyanovich P.A. 
+NRNU MEPHI, B15-501
+e-mail: Pasha2La71@gmail.com
