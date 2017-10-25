@@ -55,10 +55,10 @@ void MainWindow::on_pushButton_Create_clicked()
 
 void MainWindow::on_pushButton_Open_clicked()
 {
-    if(!this->isSaved)
+    if(!this->isSaved && this->isChanged)
     {
         QMessageBox::StandardButton que;
-        que = QMessageBox::question(this, this->Name+QString::fromUtf8("MyTextEditor"),
+        que = QMessageBox::question(this, this->Name+QString::fromUtf8(" - MyTextEditor"),
                                     QString::fromUtf8("Do you want to save file?"),
                                     QMessageBox::Yes |QMessageBox::No | QMessageBox::Cancel,QMessageBox::No);
         if(que==QMessageBox::Yes)
@@ -83,6 +83,8 @@ void MainWindow::on_pushButton_Open_clicked()
         QTextStream in(&file);
         ui->textEdit->setText(in.readAll());
         this->Path=filename;
+        this->isSaved=true;
+        this->isChanged=false;
         this->setWindowTitle(filename.split("/")[filename.split("/").length()-1]+" - MyTextEditor");
     }
 
@@ -170,7 +172,7 @@ void MainWindow::on_pushButton_Exit_clicked()
 void MainWindow::on_pushButton_Change_Font_clicked()
 {
     bool Ok;
-    this->Font = QFontDialog::getFont(&Ok, QFont("Times", 12), this, QString::fromUtf8("Выберите шрифт"));
+    this->Font = QFontDialog::getFont(&Ok, QFont("Times", 12), this, QString::fromUtf8("Choose font"));
     if (Ok)
     {
         ui->textEdit->setFont(this->Font);
@@ -225,7 +227,7 @@ void MainWindow::on_textEdit_copyAvailable(bool b)
 
 void MainWindow::on_actionSave_as_triggered()
 {
-    this->Path = QFileDialog::getSaveFileName(this, "Save as", "", "*.txt *.doc");
+    this->Path = QFileDialog::getSaveFileName(this, "Save as", "", "*.txt");
     this->Name=this->Path.split("/")[this->Path.split("/").length()-1];
     if (this->Name != "")
     {
@@ -250,6 +252,8 @@ void MainWindow::on_actionSave_as_triggered()
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
+    qDebug()<<this->isChanged;
+    qDebug()<<this->isSaved;
     if(!this->isChanged)
     {
         event->accept();
@@ -257,7 +261,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
     else if(!this->isSaved && !ui->textEdit->toPlainText().isEmpty())
     {
         QMessageBox::StandardButton que;
-        que = QMessageBox::question(this, this->Name+QString::fromUtf8("MyTextEditor"),
+        que = QMessageBox::question(this, this->Name+QString::fromUtf8(" - MyTextEditor"),
                                     QString::fromUtf8("Do you want to save file before exit?"),
                                     QMessageBox::Yes |QMessageBox::No | QMessageBox::Cancel,QMessageBox::No);
 
